@@ -1,0 +1,44 @@
+spring:
+  main:
+    # 解决Bean重复定义问题
+    allow-bean-definition-overriding: true
+  application:
+    name: stockquant-provider
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://ip:3306/l78z?useUnicode=true&characterEncoding=utf8&characterEncoding=utf8&useSSL=false
+    username: root
+    password: root
+
+###########服务启动端口号#########
+server:
+  port: 8011
+  servlet:
+    ##########项目访问路径##########
+    context-path: /stockquant-provider
+
+dubbo:
+  # 配置服务信息
+  application:
+    name: stockquant-provider
+    # 禁用QOS同一台机器可能会有端口冲突现象
+    qos-enable: false
+    qos-accept-foreign-ip: false
+  # 配置注册中心
+  registry:
+    address: nacos://ip:port
+  scan:
+    base-packages: com.taotr.stockquant.provider.service.impl
+  # 设置协议-协议由提供方指定消费方被动接受
+  protocol:
+    name: dubbo
+    port: 20880
+
+
+
+#mybatis-plus
+mybatis-plus:
+  mapper-locations: classpath:sqlmap/**/*.xml
+  configuration:
+    map-underscore-to-camel-case: false
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

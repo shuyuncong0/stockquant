@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cairh.operation.uc.provider.dao.um.UmrightsgetMapper">
+
+
+    <select id="selectUmrightsPage" resultType="java.util.HashMap" databaseId="oracle">
+        select * from ( select tmp.*, rownum row_id from ( select a.regcust_id "regcust_id", a.create_datetime "create_datetime", a.status "status", b.mobile_tel "mobile_tel", b.nick_name "nick_name",c.rightsbiz_name "rightsbiz_name", (select d.level_name from crh_uc.umleveldefine d where d.level1=(select current_level from crh_uc.umlevelinfo where regcust_id=b.regcust_id)) "level_name" from crh_uc.umrightsget a left join crh_uc.custreg b on a.regcust_id = b.regcust_id left join crh_uc.umrightsbiz c on a.rightsbiz_id = c.rightsbiz_id
+        where 1=1
+        <if test="status != null and status != ''">
+            and a.status = #{status}
+        </if>
+        <if test="nick_name != null and nick_name != ''">
+            and b.nick_name like '%'||#{nick_name}||'%'
+        </if>
+        <if test="mobile_tel != null and mobile_tel != ''">
+            and b.mobile_tel=#{mobile_tel}
+        </if>
+        <if test="rightsbiz_name != null and rightsbiz_name != ''">
+            and c.rightsbiz_name=#{rightsbiz_name}
+        </if>
+        <if test="create_datetime_start != null and create_datetime_start != ''">
+            and a.create_datetime &gt;= to_date(#{create_datetime_start},'yyyy-MM-dd hh24:mi:ss')
+        </if>
+        <if test="create_datetime_end != null and create_datetime_end != ''">
+            and a.create_datetime &lt;= to_date(#{create_datetime_end},'yyyy-MM-dd hh24:mi:ss')
+        </if>
+        order by a.create_datetime desc ,a.regcust_id) tmp where rownum &lt;= #{page_size} * #{page_num}) where row_id > (#{page_num}-1) * #{page_size}
+  </select>
+
+</mapper>

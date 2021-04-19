@@ -1,0 +1,10 @@
+/stockquant-api/target/
+/stockquant-backend-static/stockquant-backend-static.iml
+/stockquant-commons/target/
+/stockquant-commons/stockquant-commons.iml
+/stockquant-provider/target/
+/stockquant-provider/stockquant-provider.iml
+/stockquant-service/target/
+/stockquant-service/stockquant-service.iml
+/stockquant-static/stockquant-static.iml
+/.idea
