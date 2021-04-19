@@ -31,6 +31,7 @@ public class ConsumerController {
     @RequestMapping(value = "/obj",method = RequestMethod.GET)
     public CrhBeanResult getObject(){
         // 远程调用
+        System.out.println("");
         CrhBeanResult<ProviderDTO> providerTestDTOList = providerService.getObject();
         return providerTestDTOList;
     }
