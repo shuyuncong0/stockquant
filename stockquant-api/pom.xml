@@ -30,12 +30,6 @@
             <artifactId>stockquant-service</artifactId>
             <version>${taotr.stockquant.version}</version>
         </dependency>
-       <!-- <dependency>
-            <groupId>com.taotr</groupId>
-            <artifactId>stockquant-provider</artifactId>
-            <version>${taotr.stockquant.version}</version>
-        </dependency>-->
-
 
     </dependencies>
     <build>
